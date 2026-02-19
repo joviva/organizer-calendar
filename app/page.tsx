@@ -57,7 +57,7 @@ export default function Page() {
         >
           ✕
         </button>
-        <Sidebar />
+        <Sidebar onAction={() => setIsSidebarOpen(false)} />
       </aside>
 
       {/* Main Content Area */}

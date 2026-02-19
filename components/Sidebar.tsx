@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import SearchBar from './SearchBar'
 import { useCalendarStore } from '@/store/useCalendarStore'
 
-export default function Sidebar() {
+export default function Sidebar({ onAction }: { onAction?: () => void }) {
   const { selectedEventId, setSelected } = useCalendarStore()
   const [isMounted, setIsMounted] = useState(false)
 
@@ -13,6 +13,11 @@ export default function Sidebar() {
 
   const isHistory = selectedEventId === 'history'
   const isTodo = selectedEventId === 'todo'
+
+  const handleAction = (id: string | null) => {
+    setSelected(id)
+    if (onAction) onAction()
+  }
 
   return (
     <div className="flex flex-col gap-6 h-full">
@@ -34,14 +39,14 @@ export default function Sidebar() {
         {/* Toggle: Events (back to calendar) OR + New Event */}
         {isTodo || isHistory ? (
           <button
-            onClick={() => setSelected(null)}
+            onClick={() => handleAction(null)}
             className="w-full py-4 px-4 bg-[#2A2A2A] text-zinc-200 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-[#333333] border border-white/[0.05] transition-all active:scale-[0.98] shadow-xl"
           >
             Events
           </button>
         ) : (
           <button
-            onClick={() => setSelected('new')}
+            onClick={() => handleAction('new')}
             className="w-full py-4 px-4 bg-[#2A2A2A] text-zinc-200 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-[#333333] border border-white/[0.05] transition-all active:scale-[0.98] shadow-xl"
           >
             + New Event
@@ -50,7 +55,7 @@ export default function Sidebar() {
 
         {/* To Do List */}
         <button
-          onClick={() => setSelected('todo')}
+          onClick={() => handleAction('todo')}
           className={`w-full py-4 px-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] border transition-all active:scale-[0.98] shadow-xl ${
             isTodo
               ? 'bg-white text-black border-white/20'
@@ -62,7 +67,7 @@ export default function Sidebar() {
 
         {/* History */}
         <button
-          onClick={() => setSelected('history')}
+          onClick={() => handleAction('history')}
           className={`w-full py-4 px-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] border transition-all active:scale-[0.98] shadow-xl ${
             isHistory
               ? 'bg-white text-black border-white/20'
@@ -74,7 +79,7 @@ export default function Sidebar() {
       </div>
 
       {/* Search */}
-      <div className="space-y-4 mt-4">
+      <div className="space-y-4 mt-auto lg:mt-4">
         <label className="text-[11px] font-black text-zinc-600 uppercase tracking-[0.4em] block translate-x-1">
           Search Planner
         </label>
