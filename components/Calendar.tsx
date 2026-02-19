@@ -33,7 +33,7 @@ export default function Calendar() {
 
   return (
     <div className="flex flex-col h-full bg-[#2A2A2A] rounded-3xl border border-white/[0.04] overflow-hidden shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8)]">
-      <div className="flex flex-1 divide-x divide-white/[0.02]">
+      <div className="flex flex-1 divide-x divide-white/[0.02] overflow-x-auto custom-scrollbar overflow-y-hidden">
         {weekDays.map((day) => (
           <DayColumn 
             key={day.toISOString()} 

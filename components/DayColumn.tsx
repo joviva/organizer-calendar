@@ -19,12 +19,13 @@ export default function DayColumn({ date, events }: DayColumnProps) {
   }, [])
 
   return (
-    <div className="flex-1 min-w-[160px] last:border-r-0 flex flex-col h-full overflow-hidden">
-      <div className={`p-6 text-center border-b border-white/[0.02] flex-shrink-0 ${isCurrentDay ? 'bg-white/[0.03]' : 'bg-transparent'}`}>
-        <div className={`text-[11px] font-black uppercase tracking-[0.3em] ${isCurrentDay ? 'text-white' : 'text-zinc-600'}`}>
-          {format(date, 'EEEE')}
+    <div className="flex-1 min-w-[220px] lg:min-w-[160px] last:border-r-0 flex flex-col h-full overflow-hidden">
+      <div className={`p-4 lg:p-6 text-center border-b border-white/[0.02] flex-shrink-0 ${isCurrentDay ? 'bg-white/[0.03]' : 'bg-transparent'}`}>
+        <div className={`text-[10px] lg:text-[11px] font-black uppercase tracking-[0.3em] ${isCurrentDay ? 'text-white' : 'text-zinc-600'}`}>
+          <span className="lg:inline hidden">{format(date, 'EEEE')}</span>
+          <span className="lg:hidden inline">{format(date, 'EEE')}</span>
         </div>
-        <div className={`text-3xl font-black mt-2 leading-none ${isCurrentDay ? 'text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'text-zinc-400'}`}>
+        <div className={`text-2xl lg:text-3xl font-black mt-2 leading-none ${isCurrentDay ? 'text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'text-zinc-400'}`}>
           {format(date, 'd')}
         </div>
       </div>
